@@ -4,31 +4,31 @@
 
 #define NUM_REPLACEMENTS 2
 
-struct ReplacementMapEntry
+typedef struct ReplacementMapEntryStruct
 {
     int multiple;
     char *replacement;
-};
+} ReplacementMapEntry;
 
-char *itoa(const int num) 
+char *itoa(int num) 
 {
     char *out = malloc((sizeof(char) * abs(num / 10))+1);
     sprintf(out, "%d", num);
     return out;
 }
 
-char *fizzbuzzer(int num, const struct ReplacementMapEntry *replacements, int num_replacements) 
+char *fizzbuzzer(int num, const ReplacementMapEntry *replacements, int num_replacements) 
 {
-    char *out = "";
+    char *out = calloc(1, sizeof(char));
 
     for (int i = 0; i < num_replacements; i++) 
     {
         if (num % replacements[i].multiple == 0) 
         {
-            char *buf = malloc((sizeof out) + (sizeof replacements[i].replacement));
+            char *buf = malloc(strlen(out) + (strlen(replacements[i].replacement)));
             strcpy(buf, out);
             strcat(buf, replacements[i].replacement);
-            //free(out);
+            free(out);
             out = buf;
         }
     }
@@ -43,19 +43,18 @@ char *fizzbuzzer(int num, const struct ReplacementMapEntry *replacements, int nu
 
 int main(int argc, char *argv[]) 
 {
-    struct ReplacementMapEntry replacements[NUM_REPLACEMENTS] = {
-        (struct ReplacementMapEntry) {
-            .multiple = 3,
-            .replacement = "Fizz"
-        },
-        (struct ReplacementMapEntry) {
-            .multiple = 5,
-            .replacement = "Buzz"
-        }
-    };
+    ReplacementMapEntry *replacements = calloc(NUM_REPLACEMENTS, sizeof(ReplacementMapEntry));
+    replacements[0].multiple = 3; 
+    replacements[0].replacement = "Fizz";
+    replacements[1].multiple = 5; 
+    replacements[1].replacement = "Buzz";
 
     for (int num = 1; num <= 100; num++) 
     {
-        printf("%s\n", fizzbuzzer(num, replacements, NUM_REPLACEMENTS));
+        char *out = fizzbuzzer(num, replacements, NUM_REPLACEMENTS);
+        printf("%s\n", out);
+        free(out);
     }
+
+    free(replacements);
 }
