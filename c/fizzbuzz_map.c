@@ -21,8 +21,10 @@ char *fizzbuzzer(int num, const struct ReplacementMapEntry *replacements, int nu
 {
     char *out = "";
 
-    for (int i = 0; i < num_replacements; i++) {
-        if (num % replacements[i].multiple == 0) {
+    for (int i = 0; i < num_replacements; i++) 
+    {
+        if (num % replacements[i].multiple == 0) 
+        {
             char *buf = malloc((sizeof out) + (sizeof replacements[i].replacement));
             strcpy(buf, out);
             strcat(buf, replacements[i].replacement);
@@ -51,7 +53,7 @@ int main(int argc, char *argv[])
             .replacement = "Buzz"
         }
     };
-    
+
     for (int num = 1; num <= 100; num++) 
     {
         printf("%s\n", fizzbuzzer(num, replacements, NUM_REPLACEMENTS));
