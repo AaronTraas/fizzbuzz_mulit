@@ -41,12 +41,17 @@ char *fizzbuzzer(int num, const struct ReplacementMapEntry *replacements, int nu
 
 int main(int argc, char *argv[]) 
 {
-    struct ReplacementMapEntry replacements[NUM_REPLACEMENTS];
-    replacements[0].multiple = 3;
-    replacements[0].replacement = "Fizz";
-    replacements[1].multiple = 5;
-    replacements[1].replacement = "Buzz";
-
+    struct ReplacementMapEntry replacements[NUM_REPLACEMENTS] = {
+        (struct ReplacementMapEntry) {
+            .multiple = 3,
+            .replacement = "Fizz"
+        },
+        (struct ReplacementMapEntry) {
+            .multiple = 5,
+            .replacement = "Buzz"
+        }
+    };
+    
     for (int num = 1; num <= 100; num++) 
     {
         printf("%s\n", fizzbuzzer(num, replacements, NUM_REPLACEMENTS));
