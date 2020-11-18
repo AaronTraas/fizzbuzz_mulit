@@ -1,11 +1,14 @@
-use std::collections::HashMap;
+struct ReplacementMapEntry {
+    multiple: i32,
+    replacement: &'static str
+}
 
-fn fizzbuzzer(num: i32, replacements: &HashMap<i32, String>) -> String {
+fn fizzbuzzer(num: i32, replacements: &[ReplacementMapEntry]) -> String {
     let mut out = String::new();
 
-    for (multiple, replacement) in replacements.into_iter() {
-        if num % multiple == 0 {
-            out.push_str(replacement);
+    for i in 0..replacements.len() {
+        if num % replacements[i].multiple == 0 {
+            out.push_str(replacements[i].replacement);
         }
     }
 
@@ -17,11 +20,11 @@ fn fizzbuzzer(num: i32, replacements: &HashMap<i32, String>) -> String {
 }
 
 fn main() {
-    let replacements: HashMap<i32, String> = 
-        [(3, "Fizz".to_string()),
-         (5, "Buzz".to_string())]
-        .iter().cloned().collect();
-
+    let replacements: [ReplacementMapEntry; 2] = [
+        ReplacementMapEntry {multiple: 3, replacement: "Fizz"}, 
+        ReplacementMapEntry {multiple: 5, replacement: "Buzz"}
+    ];
+        
     for num in 1..=100 {
         println!("{}", fizzbuzzer(num, &replacements));
     }
