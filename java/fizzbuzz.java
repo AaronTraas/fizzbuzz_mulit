@@ -34,6 +34,5 @@ class FizzBuzz {
         {
             System.out.println(fb.fizzbuzzer(num));
         }
-        
     }
 }

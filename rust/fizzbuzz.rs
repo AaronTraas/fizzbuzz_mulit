@@ -13,13 +13,13 @@ fn fizzbuzzer(num: i32, replacements: &[ReplacementMapEntry]) -> String {
     }
 
     if out.is_empty() {
-        return num.to_string();
+        return format!("{}", num);
     }
 
     return out;
 }
 
-fn main() {
+pub fn main() {
     let replacements: [ReplacementMapEntry; 2] = [
         ReplacementMapEntry {multiple: 3, replacement: "Fizz"}, 
         ReplacementMapEntry {multiple: 5, replacement: "Buzz"}

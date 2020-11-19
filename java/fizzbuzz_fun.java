@@ -26,7 +26,6 @@ class FizzBuzzFunctional {
 
         for (int num = 1; num <= 100; num++) {
             System.out.println(FizzBuzz.fizzbuzzer(num, replacementMap));
-        }
-        
+        }     
     }
 }
