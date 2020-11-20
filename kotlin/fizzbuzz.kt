@@ -3,7 +3,7 @@ fun fizzbuzzer(num: Int, replacements: Map<Int, String>) : String =
     replacements.filter { 
         (multiple, _) -> num % multiple == 0 
     }.values.toList().joinToString("").ifEmpty{ 
-        "$num" 
+        num.toString()
     }
 
 fun fizzbuzzRange(start: Int, end: Int, replacements: Map<Int, String>) : String =
